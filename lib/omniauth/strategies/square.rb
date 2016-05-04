@@ -36,7 +36,7 @@ module OmniAuth
         parsed_response = fetch_access_token
         Rails.logger.info("\n\n<><><><><><><><><><><>#{parsed_response.inspect}<><><><><><><><><><><><><>\n\n")
 
-        parsed_response['expires_at'] = Time.parse(parsed_response['expires_at']).to_i unless parsed_response['expires_at'].nil?
+        parsed_response['expires_at'] = parsed_response['expires_at'].nil? ? 30.days.from_now : Time.parse(parsed_response['expires_at']).to_i
         parsed_response.merge!(deep_symbolize(options.auth_token_params))
 
         connect_client = client.dup
