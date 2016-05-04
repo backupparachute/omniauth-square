@@ -34,6 +34,7 @@ module OmniAuth
 
       def build_access_token
         parsed_response = fetch_access_token
+        puts "\n\n<><><><><><><><><><><>#{parsed_response.inspect}<><><><><><><><><><><><><>\n\n"
 
         parsed_response['expires_at'] = Time.parse(parsed_response['expires_at']).to_i unless parsed_response['expires_at'].nil?
         parsed_response.merge!(deep_symbolize(options.auth_token_params))
