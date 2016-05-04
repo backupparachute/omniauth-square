@@ -50,6 +50,7 @@ module OmniAuth
         opts     = access_token_request_payload
         response = client.request(client.options[:token_method], client.token_url, opts)
         parsed   = response.parsed
+        Rails.logger.info("\n\n<><><><><><><><><><><>#{parsed.inspect}<><><><><><><><><><><><><>\n\n")
         error    = ::OAuth2::Error.new(response)
         fail(error) if opts[:raise_errors] && !(parsed.is_a?(Hash) && parsed['access_token'])
         parsed
